@@ -20,6 +20,7 @@ class Quiz {
             [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
         }
     }
+                // this.question.sort(() => .5 - Math.random());
 
     checkAnswer(answer) {
         if (answer === this.getQuestion().answer)
