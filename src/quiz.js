@@ -1,38 +1,50 @@
 class Quiz {
-
-    constructor(questionsValue, timeLimitValue, timeRemainingValue) {
-        this.questions = questionsValue
-        this.timeLimit = timeLimitValue
-        this.timeRemaining = timeRemainingValue
+    constructor(questions, timeLimit, timeRemaining) {
+        this.questions = questions
+        this.timeLimit = timeLimit
+        this.timeRemaining = timeRemaining
         this.correctAnswers = 0
         this.currentQuestionIndex = 0
     }
+
     getQuestion() {
-        return this.questions[this.currentQuestionIndex];
+        return this.questions[this.currentQuestionIndex]
     }
 
     moveToNextQuestion() {
-        this.currentQuestionIndex++;
-    }
-    shuffleQuestions() {
-        for (let i = this.questions.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
-        }
+        this.currentQuestionIndex++
     }
                 // this.question.sort(() => .5 - Math.random());
 
-    checkAnswer(answer) {
-        if (answer === this.getQuestion().answer)
-            return this.correctAnswers++
+    shuffleQuestions() {
+        this.questions.sort(() => .5 - Math.random());
+    }
+
+    checkAnswer(answerToCheck) {
+        const correctAnswer = this.getQuestion().answer
+        if (answerToCheck === correctAnswer) {
+            this.correctAnswers++
+        }
     }
 
     hasEnded() {
-        if (this.currentQuestionIndex < this.questions.length) {
-            return false;
-        } else if
-            (this.currentQuestionIndex = this.questions.length) {
-            return true
+        return this.currentQuestionIndex >= this.questions.length
+    }
+
+    filterQuestionsByDifficulty(difficulty) {
+
+        if (difficulty >= 1 && difficulty <= 3) {
+            this.questions = this.questions.filter(eachQuestion =>
+                eachQuestion.difficulty === difficulty
+            )
         }
     }
+    averageDifficulty() {
+
+        const sumDifficulty = this.questions.reduce((acc, eachQuestion) => {
+            return acc + eachQuestion.difficulty
+        }, 0)
+        return sumDifficulty / this.questions.length
+    }
+
 }
