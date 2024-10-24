@@ -14,7 +14,7 @@ class Quiz {
     moveToNextQuestion() {
         this.currentQuestionIndex++
     }
-                // this.question.sort(() => .5 - Math.random());
+    // this.question.sort(() => .5 - Math.random());
 
     shuffleQuestions() {
         this.questions.sort(() => .5 - Math.random());
